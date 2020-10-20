@@ -28,6 +28,11 @@ public class Materia {
     public void setNombreMateria(String nombreMateria) {
         this.nombreMateria = nombreMateria;
     }
+    
+    @Override
+    public String toString() {
+        return "\nMateria: " + "\n|ID: " + idMateria + "\n|Nombre: " + nombreMateria + "\n";
+    }
 
     
     
