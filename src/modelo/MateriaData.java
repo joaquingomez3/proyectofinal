@@ -67,4 +67,63 @@ public class MateriaData {
             JOptionPane.showMessageDialog(null,"Error al eliminar Materia");
         } 
     }
+        
+    public Materia buscarMateria(int idMateria){
+        Materia materia = null;
+        String sql = "SELECT * FROM materia WHERE idMateria = ?";
+                
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+                    ps.setInt(1, idMateria);
+                    
+                    ResultSet rs = ps.executeQuery();
+                    
+                    if(rs.next()){
+                        JOptionPane.showMessageDialog(null,"MATERIA ENCONTRADA");
+                        materia = new Materia();
+                        materia.setIdMateria(rs.getInt("idMateria"));
+                        materia.setNombreMateria(rs.getString("nombreMateria"));
+                        
+                    }else{
+                        JOptionPane.showMessageDialog(null, "NO SE ENCONTRO LA MATERIA CON DICHO ID");
+                    }
+                        
+                    ps.close();
+                    rs.close();
+            
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+        
+        return materia;
+    }
+    
+    public List<Materia> obtenerMateria(){
+        Materia materia = null;
+        List<Materia> materias = new ArrayList<Materia>();
+        String sql = "SELECT * FROM materia";
+                
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+                                        
+                    ResultSet rs = ps.executeQuery();
+                    
+                    JOptionPane.showMessageDialog(null,"MATERIAS ENCONTRADAS");
+                    while(rs.next()){
+                        materia = new Materia();
+                        materia.setIdMateria(rs.getInt("idMateria"));
+                        materia.setNombreMateria(rs.getString("nombreMateria"));
+                        
+                        materias.add(materia);
+                    }
+                        
+                    ps.close();
+                    rs.close();
+            
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+        
+        return materias;
+    }
 }
