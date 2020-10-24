@@ -74,10 +74,7 @@ public class Alumno {
         return "\nAlumno: \n" + "|ID: " + idAlumno + "\n|Nombre: " + nombre + "\n Apellido: " + apellido + "\n|Fecha Nacimiento: " + fechaNac + "\n|Activo: " + activo+ "\n";
     }
 
-    @Override
-    public String toString() {
-        return "\nAlumno: \n" + "|ID: " + idAlumno + "\n|Nombre: " + nombre + "\n Apellido: " + apellido + "\n|Fecha Nacimiento: " + fechaNac + "\n|Activo: " + activo+ "\n";
-    } 
+    
     
     
 }
