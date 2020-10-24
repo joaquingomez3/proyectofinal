@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelo;
 
 import entidades.Alumno;
@@ -11,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
-public class AlumnoData {
+ class AlumnoData {
 
     private Connection con;
 
@@ -127,7 +131,7 @@ public class AlumnoData {
 
         return alumnos;
     }
-    public void actualizarAlumno(Alumno alumno){
+public void actualizarAlumno(Alumno alumno){
         String sql= "UPDATE alumno SET nombre= ? ,apellido = ?, fechaNac = ?, activo=? WHERE alumno.idAlumno = ?";
         
         
@@ -151,6 +155,5 @@ public class AlumnoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "" + ex);
         }
-        
-    }
+}
 }

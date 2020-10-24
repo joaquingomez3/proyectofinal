@@ -1,15 +1,18 @@
 package modelo;
+
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-import entidades.Alumno;
 import entidades.Materia;
 import java.util.ArrayList;
 import java.util.List;
+
+
+
+
 public class MateriaData {
 
     private Connection con;
@@ -122,6 +125,7 @@ public class MateriaData {
 
         return materias;
     }
+
   public void actualizarMateria(Materia materia){
         String sql= "UPDATE materia SET nombreMateria= ? WHERE materia.idMateria = ?";
         
@@ -144,4 +148,5 @@ public class MateriaData {
         }
         
     }
+
 }
