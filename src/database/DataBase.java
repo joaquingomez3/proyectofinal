@@ -4,9 +4,9 @@ package database;
 import entidades.Alumno;
 import entidades.Materia;
 import java.sql.Connection;
+import modelo.AlumnoData;
 import java.time.LocalDate;
 import java.time.Month;
-import modelo.AlumnoData;
 import modelo.Conexion;
 import modelo.MateriaData;
 
