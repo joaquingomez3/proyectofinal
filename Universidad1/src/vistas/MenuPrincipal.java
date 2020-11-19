@@ -89,6 +89,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmi_alumno.setText("Alumnos");
 
         jmi_interno.setText("Alumno");
+        jmi_interno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_internoActionPerformed(evt);
+            }
+        });
         jmi_alumno.add(jmi_interno);
 
         jm_ListarAlumnos.setText("listarAlumnos");
@@ -127,6 +132,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jm_internoMateriasActionPerformed
 
+    private void jmi_internoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_internoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        AlumnoVista aVista = new AlumnoVista();
+        aVista.setVisible(true);
+        escritorio.add(aVista);
+        escritorio.moveToFront(aVista);
+    }//GEN-LAST:event_jmi_internoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -163,7 +177,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane escritorio;
+    public javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
