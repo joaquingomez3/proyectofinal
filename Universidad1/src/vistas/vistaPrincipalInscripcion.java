@@ -33,7 +33,6 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
     public vistaPrincipalInscripcion() {
         initComponents();
         conexion = new Conexion();
-        conexion.getConnection();
         modelo = new DefaultTableModel();
         
         inscripcionData = new InscripcionData(conexion);

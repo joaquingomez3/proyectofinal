@@ -126,7 +126,7 @@ public class MateriaData {
         return materias;
     }
 
-  public void actualizarMateria(Materia materia){
+    public void actualizarMateria(Materia materia){
         String sql= "UPDATE materia SET nombreMateria= ? WHERE materia.idMateria = ?";
         
         
