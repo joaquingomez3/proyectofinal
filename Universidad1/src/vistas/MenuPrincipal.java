@@ -56,7 +56,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 281, Short.MAX_VALUE)
         );
 
         jmi_Salir.setText("Archivo");
