@@ -5,26 +5,36 @@
  */
 package universidad1;
 
+/**
+ *
+ * @author Fran Gonzalez
+ */
 public class Inscripcion {
-     private int idInscripcion;
+
+    private int idInscripcion;
     private Alumno alumno;
     private Materia materia;
-    private double calificacion;
+    private float calificacion;
 
     public Inscripcion() {
     }
 
-    public Inscripcion(Alumno alumno, Materia materia, double calificacion) {
+    public Inscripcion(int idInscripcion, Alumno alumno, Materia materia, float calificacion) {
+        this.idInscripcion = idInscripcion;
         this.alumno = alumno;
         this.materia = materia;
         this.calificacion = calificacion;
     }
 
-    public Inscripcion(int idInscripcion, Alumno alumno, Materia materia, double calificacion) {
-        this.idInscripcion = idInscripcion;
+    public Inscripcion(Alumno alumno, Materia materia, float calificacion) {
         this.alumno = alumno;
         this.materia = materia;
         this.calificacion = calificacion;
+    }
+
+    public Inscripcion(Alumno alumno, Materia materia) {
+        this.alumno = alumno;
+        this.materia = materia;
     }
 
     public int getIdInscripcion() {
@@ -51,11 +61,19 @@ public class Inscripcion {
         this.materia = materia;
     }
 
-    public double getCalificacion() {
+    public float getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(double calificacion) {
+    public void setCalificacion(float calificacion) {
         this.calificacion = calificacion;
-    }  
+    }
+
+    @Override
+    public String toString() {
+        return "Inscripcion{" + "idInscripcion=" + idInscripcion + ", alumno=" + alumno + ", materia=" + materia + ", calificacion=" + calificacion + '}';
+    }
+    
+    
+
 }
