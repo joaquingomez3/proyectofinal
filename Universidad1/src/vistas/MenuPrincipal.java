@@ -104,6 +104,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmi_Inscripciones.setText("Inscripciones");
 
         jm_interno.setText("Inscripcion");
+        jm_interno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_internoActionPerformed(evt);
+            }
+        });
         jmi_Inscripciones.add(jm_interno);
 
         jMenuBar1.add(jmi_Inscripciones);
@@ -140,6 +145,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(aVista);
         escritorio.moveToFront(aVista);
     }//GEN-LAST:event_jmi_internoActionPerformed
+
+    private void jm_internoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_internoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        vistaPrincipalInscripcion vpi = new vistaPrincipalInscripcion();
+        vpi.setVisible(true);
+        escritorio.add(vpi);
+        escritorio.moveToFront(vpi);
+    }//GEN-LAST:event_jm_internoActionPerformed
 
     /**
      * @param args the command line arguments
