@@ -86,7 +86,6 @@ public class InscripcionData {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "INSCRIPCION ENCONTRADA:");
                 ins = new Inscripcion();
                 ins.setIdInscripcion(rs.getInt("idInscripcion"));
                 ins.setCalificacion(rs.getFloat("calificacion"));
