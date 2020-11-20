@@ -78,7 +78,6 @@ public class MateriaData {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "MATERIA ENCONTRADA");
                 materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombreMateria(rs.getString("nombreMateria"));

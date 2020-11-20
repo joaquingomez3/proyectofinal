@@ -33,6 +33,6 @@ public class Materia {
     
     @Override
     public String toString() {
-        return "\nMateria: " + "\n|ID: " + idMateria + "\n|Nombre: " + nombreMateria + "\n";
+        return "|ID: " + idMateria + "|" + nombreMateria;
     }
 }

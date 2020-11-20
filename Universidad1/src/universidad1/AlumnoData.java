@@ -79,7 +79,6 @@ public class AlumnoData {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "ALUMNO ENCONTRADO");
                 alumno = new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
                 alumno.setNombre(rs.getString("nombre"));
