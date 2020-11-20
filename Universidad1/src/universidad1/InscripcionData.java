@@ -101,6 +101,35 @@ public class InscripcionData {
         }
         return ins;
     }
+    
+    public Inscripcion buscarInscripcionXIdForaneos(int idMateria, int idAlumno) {
+
+        Inscripcion ins = null;
+        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                ins = new Inscripcion();
+                ins.setIdInscripcion(rs.getInt("idInscripcion"));
+                ins.setCalificacion(rs.getFloat("calificacion"));
+                ins.setAlumno(obtieneAlumno(rs.getInt("idAlumno")));
+                ins.setMateria(obtieneMateria(rs.getInt("idMateria")));
+            } else {
+                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO LA INSCRIPCION CON DICHO ID");
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de tipo:");
+        }
+        return ins;
+    }
 
     public void actualizarInscripcion(Inscripcion inscripcion) {
         String sql = "UPDATE inscripcion SET calificacion= ? WHERE inscripcion.idInscripcion = ?";
@@ -135,9 +164,9 @@ public class InscripcionData {
         return md.buscarMateria(idMateria);
     }
 
-    public List<Alumno> listarAlumnosXMateria(int idMateria) {
-        List<Alumno> alumnos = new ArrayList<Alumno>();
-        Alumno alumno = null;
+    public List<Inscripcion> listarAlumnosXMateria(int idMateria) {
+        List<Inscripcion> alumnos = new ArrayList<Inscripcion>();
+        Inscripcion ins = null;
 
         String sql = "SELECT * FROM inscripcion WHERE idMateria = ?";
 
@@ -148,10 +177,13 @@ public class InscripcionData {
             ResultSet rs = ps.executeQuery(); // trae un listado con inscripciones
 
             while (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Cargando alumnos encontrados....");
-                alumno = obtieneAlumno(rs.getInt("idAlumno"));
-
-                alumnos.add(alumno);
+                ins = new Inscripcion();
+                ins.setIdInscripcion(rs.getInt("idInscripcion"));
+                ins.setCalificacion(rs.getFloat("calificacion"));
+                ins.setAlumno(obtieneAlumno(rs.getInt("idAlumno")));
+                ins.setMateria(obtieneMateria(rs.getInt("idMateria")));
+                alumnos.add(ins);
+                alumnos.add(ins);
             }
 
         } catch (SQLException ex) {
@@ -161,9 +193,9 @@ public class InscripcionData {
 
     }
     
-    public List<Materia> listarMateriasXAlumno(int idAlumno) {
-        List<Materia> materias = new ArrayList<Materia>();
-        Materia materia = null;
+    public List<Inscripcion> listarMateriasXAlumno(int idAlumno) {
+        List<Inscripcion> materias = new ArrayList<Inscripcion>();
+        Inscripcion ins = null;
 
         String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
 
@@ -174,9 +206,12 @@ public class InscripcionData {
             ResultSet rs = ps.executeQuery(); // trae un listado con inscripciones
 
             while (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Cargando materias encontradas....");
-                materia = obtieneMateria(rs.getInt("idMateria"));
-                materias.add(materia);
+                ins = new Inscripcion();
+                ins.setIdInscripcion(rs.getInt("idInscripcion"));
+                ins.setCalificacion(rs.getFloat("calificacion"));
+                ins.setAlumno(obtieneAlumno(rs.getInt("idAlumno")));
+                ins.setMateria(obtieneMateria(rs.getInt("idMateria")));
+                materias.add(ins);
             }
 
         } catch (SQLException ex) {

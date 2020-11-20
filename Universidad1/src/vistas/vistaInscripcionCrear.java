@@ -8,8 +8,10 @@ package vistas;
 import universidad1.Alumno;
 import universidad1.Materia;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import universidad1.AlumnoData;
 import universidad1.Conexion;
+import universidad1.Inscripcion;
 import universidad1.InscripcionData;
 import universidad1.MateriaData;
 
@@ -31,11 +33,15 @@ public class vistaInscripcionCrear extends javax.swing.JInternalFrame {
         conexion = new Conexion();
         conexion.getConnection();
         
+        inscripcionData = new InscripcionData(conexion);
         materiaData = new MateriaData(conexion);
         listaMaterias = (ArrayList<Materia>) materiaData.obtenerMaterias();
         
         alumnoData = new AlumnoData(conexion);
         listaAlumnos = (ArrayList<Alumno>) alumnoData.obtenerAlumnos();
+        
+        cbCargarlistadoMaterias();
+        cbCargarListadoAlumno();
     }
 
     /**
@@ -48,7 +54,6 @@ public class vistaInscripcionCrear extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         panelCreacion = new javax.swing.JPanel();
-        btnAtras = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         txtCalificacion = new javax.swing.JTextField();
         labelCalificacion = new javax.swing.JLabel();
@@ -63,14 +68,12 @@ public class vistaInscripcionCrear extends javax.swing.JInternalFrame {
 
         panelCreacion.setBorder(javax.swing.BorderFactory.createTitledBorder("Creacion"));
 
-        btnAtras.setText("Atras");
-        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtrasActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-
-        btnGuardar.setText("Guardar");
 
         txtCalificacion.setText("0");
         txtCalificacion.setToolTipText("Opcional");
@@ -100,8 +103,6 @@ public class vistaInscripcionCrear extends javax.swing.JInternalFrame {
             panelCreacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCreacionLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAtras)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardar)
                 .addContainerGap())
             .addGroup(panelCreacionLayout.createSequentialGroup()
@@ -137,10 +138,8 @@ public class vistaInscripcionCrear extends javax.swing.JInternalFrame {
                 .addGroup(panelCreacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCalificacion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
-                .addGroup(panelCreacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAtras)
-                    .addComponent(btnGuardar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+                .addComponent(btnGuardar)
                 .addContainerGap())
         );
 
@@ -164,10 +163,6 @@ public class vistaInscripcionCrear extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAtrasActionPerformed
-
     private void cbListaMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbListaMateriasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbListaMateriasActionPerformed
@@ -176,11 +171,37 @@ public class vistaInscripcionCrear extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbListaAlumnosActionPerformed
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        guardarInscripcion();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void cbCargarlistadoMaterias(){
+        for(Materia item:listaMaterias){
+            cbListaMaterias.addItem(item);
+        }
+    }
     
+    private void cbCargarListadoAlumno(){
+        for(Alumno item: listaAlumnos){
+            cbListaAlumnos.addItem(item);
+        }
+    }
+    
+    private void guardarInscripcion(){
+        Materia materia = (Materia) cbListaMaterias.getSelectedItem();
+        Alumno alumno = (Alumno) cbListaAlumnos.getSelectedItem();
+        float nota = Float.parseFloat(txtCalificacion.getText());
+        
+        if(alumno!=null && materia!=null){
+            Inscripcion ins = new Inscripcion(alumno,materia,nota);
+            inscripcionData.guardarInscripcion(ins);
+        }
+        else
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR ALUMNO Y MATERIA");
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnAtras;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JComboBox<Alumno> cbListaAlumnos;
     public javax.swing.JComboBox<Materia> cbListaMaterias;

@@ -40,6 +40,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmi_interno = new javax.swing.JMenuItem();
         jm_ListarAlumnos = new javax.swing.JMenuItem();
         jmi_Inscripciones = new javax.swing.JMenu();
+        menuCrearInscripcion = new javax.swing.JMenuItem();
         jm_interno = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
@@ -52,11 +53,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 763, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 281, Short.MAX_VALUE)
+            .addGap(0, 489, Short.MAX_VALUE)
         );
 
         jmi_Salir.setText("Archivo");
@@ -103,7 +104,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jmi_Inscripciones.setText("Inscripciones");
 
-        jm_interno.setText("Inscripcion");
+        menuCrearInscripcion.setText("Crear Inscripcion");
+        menuCrearInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCrearInscripcionActionPerformed(evt);
+            }
+        });
+        jmi_Inscripciones.add(menuCrearInscripcion);
+
+        jm_interno.setText("Administrar inscripciones");
         jm_interno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jm_internoActionPerformed(evt);
@@ -123,7 +132,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -154,6 +163,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(vpi);
         escritorio.moveToFront(vpi);
     }//GEN-LAST:event_jm_internoActionPerformed
+
+    private void menuCrearInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCrearInscripcionActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        vistaInscripcionCrear vic = new vistaInscripcionCrear();
+        vic.setVisible(true);
+        escritorio.add(vic);
+        escritorio.moveToFront(vic);
+    }//GEN-LAST:event_menuCrearInscripcionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,5 +223,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JMenu jmi_Salir;
     public javax.swing.JMenu jmi_alumno;
     public javax.swing.JMenuItem jmi_interno;
+    public javax.swing.JMenuItem menuCrearInscripcion;
     // End of variables declaration//GEN-END:variables
 }

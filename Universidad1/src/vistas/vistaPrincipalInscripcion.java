@@ -9,6 +9,7 @@ import universidad1.Alumno;
 import universidad1.Inscripcion;
 import universidad1.Materia;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidad1.AlumnoData;
 import universidad1.Conexion;
@@ -61,7 +62,6 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         panelSeleccion = new javax.swing.JPanel();
-        btnCrear = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         cbListaMaterias = new javax.swing.JComboBox<>();
@@ -71,6 +71,9 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
         btnFiltrar = new javax.swing.JButton();
         txtSeleccion = new javax.swing.JTextField();
         labelInscripcion = new javax.swing.JLabel();
+        labelCalificacion = new javax.swing.JLabel();
+        txtCalificacion = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         panelDetalles = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabDetalles = new javax.swing.JTable();
@@ -82,11 +85,19 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
 
         panelSeleccion.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccion Inscripcion"));
 
-        btnCrear.setText("CREAR");
-
-        btnEditar.setText("EDITAR");
+        btnEditar.setText("ACTUALIZAR");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("ELIMINAR");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         cbListaMaterias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,46 +132,76 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
 
         labelInscripcion.setText("Id Inscrip");
 
+        labelCalificacion.setText("Calificacion");
+
+        txtCalificacion.setText("0");
+        txtCalificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCalificacionActionPerformed(evt);
+            }
+        });
+
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelSeleccionLayout = new javax.swing.GroupLayout(panelSeleccion);
         panelSeleccion.setLayout(panelSeleccionLayout);
         panelSeleccionLayout.setHorizontalGroup(
             panelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSeleccionLayout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addComponent(btnFiltrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeleccionLayout.createSequentialGroup()
-                .addComponent(btnCrear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelInscripcion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEditar)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelMateria)
+                    .addComponent(cbListaMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63)
+                .addComponent(cbListaAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
             .addGroup(panelSeleccionLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
                 .addGroup(panelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbListaMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMateria))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbListaAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelAlumno))
-                .addGap(54, 54, 54))
+                    .addGroup(panelSeleccionLayout.createSequentialGroup()
+                        .addGroup(panelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelSeleccionLayout.createSequentialGroup()
+                                .addGap(193, 193, 193)
+                                .addComponent(btnFiltrar))
+                            .addGroup(panelSeleccionLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(labelCalificacion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEditar)))
+                        .addGap(14, 14, 14)
+                        .addComponent(labelAlumno))
+                    .addGroup(panelSeleccionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelInscripcion)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelSeleccionLayout.setVerticalGroup(
             panelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSeleccionLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(panelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear)
-                    .addComponent(btnEditar)
-                    .addComponent(btnEliminar)
                     .addComponent(txtSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelInscripcion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(labelInscripcion)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelCalificacion)
+                    .addComponent(btnEditar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(panelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMateria)
                     .addComponent(labelAlumno))
@@ -168,9 +209,8 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
                 .addGroup(panelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbListaAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbListaMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnFiltrar)
-                .addGap(6, 6, 6))
+                .addGap(24, 24, 24)
+                .addComponent(btnFiltrar))
         );
 
         panelDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles Inscripcion"));
@@ -210,7 +250,7 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDetallesLayout.createSequentialGroup()
                 .addComponent(btnListar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -227,8 +267,8 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(panelSeleccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(panelDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -249,12 +289,28 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbListaMateriasActionPerformed
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        // TODO add your handling code here:
+        filtrar();
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
     private void txtSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeleccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSeleccionActionPerformed
+
+    private void txtCalificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCalificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCalificacionActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscarInscripcion();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        actualizarNota();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        eliminarInscripcion();
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void cbCargarlistadoMaterias(){
         for(Materia item:listaMaterias){
@@ -292,17 +348,91 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
     
     public void cargarTablaCompleta(){
         borrarFilasTabla();
-        
+        listaInscripcion = (ArrayList<Inscripcion>) inscripcionData.obtenerInscripciones();
         for(Inscripcion ins: listaInscripcion){
             modelo.addRow(new Object[]{ins.getIdInscripcion(),ins.getMateria().getNombreMateria(),ins.getAlumno().getApellido()+", "+ins.getAlumno().getNombre(),ins.getAlumno().isActivo(),ins.getCalificacion()});
         }
     }
     
+    public void buscarInscripcion(){
+        int id = Integer.parseInt(txtSeleccion.getText());
+        Inscripcion ins = inscripcionData.buscarInscripcion(id);
+        
+        if(ins!=null){
+            JOptionPane.showMessageDialog(null, "INSCRIPCION ENCONTRADA");
+            borrarFilasTabla();
+            modelo.addRow(new Object[]{ins.getIdInscripcion(),ins.getMateria().getNombreMateria(),ins.getAlumno().getApellido()+", "+ins.getAlumno().getNombre(),ins.getAlumno().isActivo(),ins.getCalificacion()});
+            txtCalificacion.setText(ins.getCalificacion() + "");
+        }
+    }
+    
+    public void actualizarNota(){
+        int id = Integer.parseInt(txtSeleccion.getText());
+        Inscripcion ins = inscripcionData.buscarInscripcion(id);
+        
+         if(ins!=null){
+            
+             ins.setCalificacion(Float.parseFloat(txtCalificacion.getText()));
+             inscripcionData.actualizarInscripcion(ins);
+             borrarFilasTabla();
+             ins = inscripcionData.buscarInscripcion(id);
+             modelo.addRow(new Object[]{ins.getIdInscripcion(),ins.getMateria().getNombreMateria(),ins.getAlumno().getApellido()+", "+ins.getAlumno().getNombre(),ins.getAlumno().isActivo(),ins.getCalificacion()});
+             
+         }
+    }
+    
+    public void eliminarInscripcion(){
+        
+        if(JOptionPane.showConfirmDialog(null, "ESTA SEGURO QUE DESEA ELIMINAR LA INSCRIPCION?") == 0){
+            int id = Integer.parseInt(txtSeleccion.getText());
+            Inscripcion ins = inscripcionData.buscarInscripcion(id);
+            inscripcionData.eliminarInscripcion(ins);
+            JOptionPane.showMessageDialog(null, "SE ELIMINIO REGISTRO");
+            borrarFilasTabla();
+            cargarTablaCompleta();
+            txtCalificacion.setText("0");
+            txtSeleccion.setText("0");
+        }
+     }
+    
+    public void filtrar(){
+        Materia materia = (Materia) cbListaMaterias.getSelectedItem();
+        Alumno alumno = (Alumno) cbListaAlumnos.getSelectedItem();
+        
+        if(alumno.equals(null) && materia.equals(null)){
+            JOptionPane.showConfirmDialog(null, "PARA FILTRAR AL MENOS DEBE SELECCIONAR UN BOX");
+        }else{
+            if(alumno.equals(null)){
+                borrarFilasTabla();
+                listaInscripcion = (ArrayList<Inscripcion>) inscripcionData.listarAlumnosXMateria(materia.getIdMateria());
+                for(Inscripcion ins: listaInscripcion){
+                    modelo.addRow(new Object[]{ins.getIdInscripcion(),ins.getMateria().getNombreMateria(),ins.getAlumno().getApellido()+", "+ins.getAlumno().getNombre(),ins.getAlumno().isActivo(),ins.getCalificacion()});
+                }
+            }else{
+                if(materia.equals(null)){
+                    borrarFilasTabla();
+                    listaInscripcion = (ArrayList<Inscripcion>) inscripcionData.listarMateriasXAlumno(alumno.getIdAlumno());
+                    for(Inscripcion ins: listaInscripcion){
+                        modelo.addRow(new Object[]{ins.getIdInscripcion(),ins.getMateria().getNombreMateria(),ins.getAlumno().getApellido()+", "+ins.getAlumno().getNombre(),ins.getAlumno().isActivo(),ins.getCalificacion()});
+                    }
+                }else{
+                    borrarFilasTabla();
+                    Inscripcion ins = inscripcionData.buscarInscripcionXIdForaneos(materia.getIdMateria(), alumno.getIdAlumno());
+                    modelo.addRow(new Object[]{ins.getIdInscripcion(),ins.getMateria().getNombreMateria(),ins.getAlumno().getApellido()+", "+ins.getAlumno().getNombre(),ins.getAlumno().isActivo(),ins.getCalificacion()});
+                    
+                }
+            }
+                
+        }
+        
+    }
+    
+    
     
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnCrear;
+    public javax.swing.JButton btnBuscar;
     public javax.swing.JButton btnEditar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnFiltrar;
@@ -311,11 +441,13 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
     public javax.swing.JComboBox<Materia> cbListaMaterias;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JLabel labelAlumno;
+    public javax.swing.JLabel labelCalificacion;
     public javax.swing.JLabel labelInscripcion;
     public javax.swing.JLabel labelMateria;
     private javax.swing.JPanel panelDetalles;
     private javax.swing.JPanel panelSeleccion;
     public javax.swing.JTable tabDetalles;
+    public javax.swing.JTextField txtCalificacion;
     public javax.swing.JTextField txtSeleccion;
     // End of variables declaration//GEN-END:variables
 }
