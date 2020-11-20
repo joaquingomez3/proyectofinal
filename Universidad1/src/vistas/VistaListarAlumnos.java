@@ -126,11 +126,11 @@ public class VistaListarAlumnos extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JInternalFrame jInternalFrame1;
+    public javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcb_ListadoMaterias;
-    private javax.swing.JLabel jl_Materia;
-    private javax.swing.JLabel jl_TituloListarAlumno;
-    private javax.swing.JTable jt_ListadoAlumnos;
+    public javax.swing.JComboBox<String> jcb_ListadoMaterias;
+    public javax.swing.JLabel jl_Materia;
+    public javax.swing.JLabel jl_TituloListarAlumno;
+    public javax.swing.JTable jt_ListadoAlumnos;
     // End of variables declaration//GEN-END:variables
 }

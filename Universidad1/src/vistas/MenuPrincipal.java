@@ -98,6 +98,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmi_alumno.add(jmi_interno);
 
         jm_ListarAlumnos.setText("listarAlumnos");
+        jm_ListarAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_ListarAlumnosActionPerformed(evt);
+            }
+        });
         jmi_alumno.add(jm_ListarAlumnos);
 
         jMenuBar1.add(jmi_alumno);
@@ -172,6 +177,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(vic);
         escritorio.moveToFront(vic);
     }//GEN-LAST:event_menuCrearInscripcionActionPerformed
+
+    private void jm_ListarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_ListarAlumnosActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarAlumnos vla = new VistaListarAlumnos();
+        vla.setVisible(true);
+        escritorio.add(vla);
+        escritorio.moveToFront(vla);
+    }//GEN-LAST:event_jm_ListarAlumnosActionPerformed
 
     /**
      * @param args the command line arguments

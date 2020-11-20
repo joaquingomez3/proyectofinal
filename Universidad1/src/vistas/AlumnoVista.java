@@ -239,22 +239,22 @@ public class AlumnoVista extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jb_Activo;
-    private javax.swing.JButton jb_Actualizar;
-    private javax.swing.JButton jb_Borrar;
-    private javax.swing.JButton jb_Buscar;
-    private javax.swing.JLabel jb_FechaNac;
-    private javax.swing.JButton jb_Guardar;
-    private javax.swing.JLabel jb_IdAlumno;
-    private javax.swing.JButton jb_Limpiar;
-    private javax.swing.JLabel jb_Nombre;
-    private javax.swing.JLabel jb_TituloAlumno;
-    private javax.swing.JCheckBox jcb_Activo;
-    private javax.swing.JInternalFrame jif_Alumno;
-    private javax.swing.JLabel jl_Apellido;
-    private javax.swing.JTextField jtf_Apellido;
-    private javax.swing.JTextField jtf_FechaNacimiento;
-    private javax.swing.JTextField jtf_IdAlumno;
-    private javax.swing.JTextField jtf_Nombre;
+    public javax.swing.JLabel jb_Activo;
+    public javax.swing.JButton jb_Actualizar;
+    public javax.swing.JButton jb_Borrar;
+    public javax.swing.JButton jb_Buscar;
+    public javax.swing.JLabel jb_FechaNac;
+    public javax.swing.JButton jb_Guardar;
+    public javax.swing.JLabel jb_IdAlumno;
+    public javax.swing.JButton jb_Limpiar;
+    public javax.swing.JLabel jb_Nombre;
+    public javax.swing.JLabel jb_TituloAlumno;
+    public javax.swing.JCheckBox jcb_Activo;
+    public javax.swing.JInternalFrame jif_Alumno;
+    public javax.swing.JLabel jl_Apellido;
+    public javax.swing.JTextField jtf_Apellido;
+    public javax.swing.JTextField jtf_FechaNacimiento;
+    public javax.swing.JTextField jtf_IdAlumno;
+    public javax.swing.JTextField jtf_Nombre;
     // End of variables declaration//GEN-END:variables
 }
