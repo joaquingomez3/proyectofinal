@@ -71,15 +71,15 @@
                           <Component id="txtCalificacion" min="-2" pref="117" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="labelAlumno" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbListaMaterias" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="cbListaMaterias" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="labelMateria" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="97" max="32767" attributes="0"/>
+                          <EmptySpace pref="98" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cbListaAlumnos" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                              <Component id="labelMateria" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelAlumno" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbListaAlumnos" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
@@ -90,12 +90,12 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelAlumno" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelMateria" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbListaAlumnos" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbListaMaterias" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -105,7 +105,7 @@
                       <Component id="txtCalificacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelCalificacion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="196" max="32767" attributes="0"/>
+                  <EmptySpace pref="200" max="32767" attributes="0"/>
                   <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

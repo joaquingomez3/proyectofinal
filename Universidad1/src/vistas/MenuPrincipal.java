@@ -63,6 +63,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmi_Salir.setText("Archivo");
 
         jm_internoSalir.setText("Salir");
+        jm_internoSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_internoSalirActionPerformed(evt);
+            }
+        });
         jmi_Salir.add(jm_internoSalir);
 
         jMenuBar1.add(jmi_Salir);
@@ -154,10 +159,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jmi_internoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_internoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        AlumnoVista aVista = new AlumnoVista();
-        aVista.setVisible(true);
-        escritorio.add(aVista);
-        escritorio.moveToFront(aVista);
+        VistaAlumno vAlumno = new VistaAlumno();
+        vAlumno.setVisible(true);
+        escritorio.add(vAlumno);
+        escritorio.moveToFront(vAlumno);
     }//GEN-LAST:event_jmi_internoActionPerformed
 
     private void jm_internoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_internoActionPerformed
@@ -186,6 +191,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(vla);
         escritorio.moveToFront(vla);
     }//GEN-LAST:event_jm_ListarAlumnosActionPerformed
+
+    private void jm_internoSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_internoSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jm_internoSalirActionPerformed
 
     /**
      * @param args the command line arguments
