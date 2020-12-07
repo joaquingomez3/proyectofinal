@@ -38,7 +38,7 @@ public class MateriaData {
 
             if (rs.next()) {
                 materia.setIdMateria(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Se cargo correctamente su materia");
+                JOptionPane.showMessageDialog(null, "SE CARGO CORRECTAMENTE LA MATERIA");
             } else {
                 JOptionPane.showMessageDialog(null, "No puedo obtener id");
             }
@@ -47,7 +47,7 @@ public class MateriaData {
             rs.close();
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(null, "Error al guardar materia");
+            JOptionPane.showMessageDialog(null, "ERROR: " + e);
         }
     }
 
@@ -58,12 +58,16 @@ public class MateriaData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, materia.getIdMateria());
 
-            ps.executeUpdate();
+            if (ps.executeUpdate() != 0) {
+                JOptionPane.showMessageDialog(null, "SE ELIMINÓ LA MATERIA");
+            } else {
+                JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR LA MATERIA");
+            }
 
             ps.close();
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR MATERIA");
+            JOptionPane.showMessageDialog(null, "ERROR: " + e);
         }
     }
 
@@ -90,7 +94,7 @@ public class MateriaData {
             rs.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR");
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex);
         }
 
         return materia;
@@ -143,7 +147,7 @@ public class MateriaData {
             
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "" + ex);
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex);
         }
         
     }

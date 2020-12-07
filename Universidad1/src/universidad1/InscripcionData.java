@@ -41,7 +41,7 @@ public class InscripcionData {
 
             if (rs.next()) {
                 inscripcion.setIdInscripcion(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Se ha cargado la inscripicio correctamente");
+                JOptionPane.showMessageDialog(null, "SE HA CARGADO LA INSCRIPCION CORRECTAMENTE");
             } else {
                 JOptionPane.showMessageDialog(null, "No puedo obtener id");
             }
@@ -64,7 +64,11 @@ public class InscripcionData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, inscripcion.getIdInscripcion());
 
-            ps.executeUpdate();
+            if (ps.executeUpdate() != 0) {
+                JOptionPane.showMessageDialog(null, "SE ELIMINÓ LA INSCRIPCION");
+            } else {
+                JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR DICHA INSCRIPCION");
+            }
 
             ps.close();
             //con.close();
@@ -92,7 +96,7 @@ public class InscripcionData {
                 ins.setAlumno(obtieneAlumno(rs.getInt("idAlumno")));
                 ins.setMateria(obtieneMateria(rs.getInt("idMateria")));
             } else {
-                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO LA INSCRIPCION CON DICHO ID");
+                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO LA INSCRIPCION");
             }
             rs.close();
             ps.close();
@@ -121,7 +125,7 @@ public class InscripcionData {
                 ins.setAlumno(obtieneAlumno(rs.getInt("idAlumno")));
                 ins.setMateria(obtieneMateria(rs.getInt("idMateria")));
             } else {
-                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO LA INSCRIPCION CON DICHO ID");
+                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO LA INSCRIPCION");
             }
             rs.close();
             ps.close();
@@ -182,7 +186,6 @@ public class InscripcionData {
                 ins.setCalificacion(rs.getFloat("calificacion"));
                 ins.setAlumno(obtieneAlumno(rs.getInt("idAlumno")));
                 ins.setMateria(obtieneMateria(rs.getInt("idMateria")));
-                alumnos.add(ins);
                 alumnos.add(ins);
             }
 

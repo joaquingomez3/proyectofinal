@@ -313,12 +313,18 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void cbCargarlistadoMaterias(){
+        Materia elegir = new Materia("Elegir");
+        cbListaMaterias.addItem(elegir);
         for(Materia item:listaMaterias){
             cbListaMaterias.addItem(item);
         }
     }
     
     private void cbCargarListadoAlumno(){
+        Alumno elegir = new Alumno();
+        elegir.setNombre("");
+        elegir.setApellido("Elegir");
+        cbListaAlumnos.addItem(elegir);
         for(Alumno item: listaAlumnos){
             cbListaAlumnos.addItem(item);
         }
@@ -387,7 +393,6 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
             int id = Integer.parseInt(txtSeleccion.getText());
             Inscripcion ins = inscripcionData.buscarInscripcion(id);
             inscripcionData.eliminarInscripcion(ins);
-            JOptionPane.showMessageDialog(null, "SE ELIMINIO REGISTRO");
             borrarFilasTabla();
             cargarTablaCompleta();
             txtCalificacion.setText("0");
@@ -399,21 +404,21 @@ public class vistaPrincipalInscripcion extends javax.swing.JInternalFrame {
         Materia materia = (Materia) cbListaMaterias.getSelectedItem();
         Alumno alumno = (Alumno) cbListaAlumnos.getSelectedItem();
         
-        if(alumno.equals(null) && materia.equals(null)){
-            JOptionPane.showConfirmDialog(null, "PARA FILTRAR AL MENOS DEBE SELECCIONAR UN BOX");
+        if(alumno.getApellido().equals("Elegir") && materia.getNombreMateria().equals("Elegir")){
+            JOptionPane.showMessageDialog(null, "PARA FILTRAR AL MENOS DEBE SELECCIONAR UN BOX");
         }else{
-            if(alumno.equals(null)){
+            if(alumno.getApellido().equals("Elegir")){
                 borrarFilasTabla();
                 listaInscripcion = (ArrayList<Inscripcion>) inscripcionData.listarAlumnosXMateria(materia.getIdMateria());
                 for(Inscripcion ins: listaInscripcion){
-                    modelo.addRow(new Object[]{ins.getIdInscripcion(),ins.getMateria().getNombreMateria(),ins.getAlumno().getApellido()+", "+ins.getAlumno().getNombre(),ins.getAlumno().isActivo(),ins.getCalificacion()});
+                    modelo.addRow(new Object[]{ins.getIdInscripcion(),ins.getMateria().getNombreMateria(),ins.getAlumno().getApellido()+", "+ins.getAlumno().getNombre(),ins.getAlumno().isActivo()? "SI" : "NO",ins.getCalificacion()});
                 }
             }else{
-                if(materia.equals(null)){
+                if(materia.getNombreMateria().equals("Elegir")){
                     borrarFilasTabla();
                     listaInscripcion = (ArrayList<Inscripcion>) inscripcionData.listarMateriasXAlumno(alumno.getIdAlumno());
                     for(Inscripcion ins: listaInscripcion){
-                        modelo.addRow(new Object[]{ins.getIdInscripcion(),ins.getMateria().getNombreMateria(),ins.getAlumno().getApellido()+", "+ins.getAlumno().getNombre(),ins.getAlumno().isActivo(),ins.getCalificacion()});
+                        modelo.addRow(new Object[]{ins.getIdInscripcion(),ins.getMateria().getNombreMateria(),ins.getAlumno().getApellido()+", "+ins.getAlumno().getNombre(),ins.getAlumno().isActivo()? "SI" : "NO",ins.getCalificacion()});
                     }
                 }else{
                     borrarFilasTabla();

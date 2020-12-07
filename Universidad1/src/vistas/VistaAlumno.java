@@ -4,6 +4,7 @@ import universidad1.AlumnoData;
 import universidad1.Conexion;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 public class VistaAlumno extends javax.swing.JInternalFrame {
 
@@ -68,6 +69,9 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             }
         });
 
+        jtf_FechaNacimiento.setText("0000-00-00");
+        jtf_FechaNacimiento.setToolTipText("AAAA-MM-DD");
+
         jb_Activo.setText("Activo");
 
         jb_FechaNac.setText("Fecha Nacimiento");
@@ -82,7 +86,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         jb_TituloAlumno.setForeground(new java.awt.Color(0, 0, 225));
         jb_TituloAlumno.setText("-Alumno-");
 
-        jb_Actualizar1.setText("Actualizar1");
+        jb_Actualizar1.setText("Actualizar");
         jb_Actualizar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_Actualizar1ActionPerformed(evt);
@@ -161,7 +165,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jb_Activo)
                         .addGap(7, 7, 7)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,31 +175,57 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         jtf_Nombre.setText("");
         jtf_Apellido.setText("");
         jtf_IdAlumno.setText("");
-        jtf_FechaNacimiento.setText("");
         jcb_Activo.setEnabled(true);
     }//GEN-LAST:event_jb_LimpiarActionPerformed
 
     private void jb_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BorrarActionPerformed
-        int id = Integer.parseInt(jtf_IdAlumno.getText());
-        Alumno a = null;
-        a = alumnoData.buscarAlumno(id);
-        alumnoData.eliminarAlumno(a);
+        if(JOptionPane.showConfirmDialog(null, "ESTA SEGURO QUE DESEA ELIMINAR AL ALUMNO?") == 0){
+             int id = 0;
+            try {
+                 id = Integer.parseInt(jtf_IdAlumno.getText());
+            } catch (NumberFormatException numberFormatException) {
+                JOptionPane.showMessageDialog(null, "DICHO ID NO ES VALIDO");
+            }
+            Alumno a = alumnoData.buscarAlumno(id);
+            alumnoData.eliminarAlumno(a);
+            jtf_Nombre.setText("");
+            jtf_Apellido.setText("");
+            jtf_IdAlumno.setText("");
+            jtf_FechaNacimiento.setText("");
+            jcb_Activo.setEnabled(false);
+            
+        }
+        
+        
     }//GEN-LAST:event_jb_BorrarActionPerformed
 
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
-        String nombre = jtf_Nombre.getText();
-        String apellido = jtf_Apellido.getText();
-        LocalDate fechaNac = LocalDate.parse(jtf_FechaNacimiento.getText(), DateTimeFormatter.ofPattern("yyyy-mm-dd"));
-        boolean activo = jcb_Activo.isSelected();
-        Alumno a = new Alumno(-1, apellido ,nombre, fechaNac, activo);
-        alumnoData.guardarAlumno(a);
-        jtf_IdAlumno.setText(a.getIdAlumno() + "");
+        String apellido = null;
+        String nombre = null;
+        LocalDate fechaNac = null;
+        boolean activo = false;
+        try {
+            nombre = jtf_Nombre.getText();
+            apellido = jtf_Apellido.getText();
+            fechaNac = LocalDate.parse(jtf_FechaNacimiento.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            activo = jcb_Activo.isSelected();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR, COMPLETE LOS CAMPOS CORRECTAMENTE");
+        }
+            Alumno a = new Alumno(nombre, apellido, fechaNac, activo);
+            alumnoData.guardarAlumno(a);
+            jtf_IdAlumno.setText(a.getIdAlumno() + "");
+        
+        
     }//GEN-LAST:event_jb_GuardarActionPerformed
 
     private void jb_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BuscarActionPerformed
-        int id = Integer.parseInt(jtf_IdAlumno.getText());
-        Alumno a = new Alumno();
-        a = alumnoData.buscarAlumno(id);
+        int id = 0;
+        try {
+            id = Integer.parseInt(jtf_IdAlumno.getText());
+        } catch (NumberFormatException numberFormatException) {
+        }
+        Alumno a = alumnoData.buscarAlumno(id);
         if (a != null){
             jtf_IdAlumno.setText(a.getIdAlumno() + "");
             jtf_Nombre.setText(a.getNombre());
@@ -207,15 +237,17 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jb_BuscarActionPerformed
 
     private void jb_Actualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_Actualizar1ActionPerformed
-        if (jtf_IdAlumno.getText() != null)
+        if (!jtf_IdAlumno.getText().equals(""))
         {
             int id = Integer.parseInt(jtf_IdAlumno.getText());
             String nombre = jtf_Nombre.getText();
             String apellido = jtf_Apellido.getText();
-            LocalDate fechaNac = LocalDate.parse(jtf_FechaNacimiento.getText(), DateTimeFormatter.ofPattern("yyyy-mm-dd"));
+            LocalDate fechaNac = LocalDate.parse(jtf_FechaNacimiento.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             boolean activo = jcb_Activo.isSelected();
-            Alumno a = new Alumno(id, apellido ,nombre, fechaNac, activo);
+            Alumno a = new Alumno(id, nombre , apellido, fechaNac, activo);
             alumnoData.actualizarAlumno(a);
+        }else{
+            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN ID PARA ACTUALIZAR");
         }
     }//GEN-LAST:event_jb_Actualizar1ActionPerformed
 

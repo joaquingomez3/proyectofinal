@@ -1,5 +1,6 @@
 package vistas;
 
+import javax.swing.JOptionPane;
 import universidad1.Conexion;
 import universidad1.Materia;
 import universidad1.MateriaData;
@@ -43,9 +44,9 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         });
 
         jl_MATERIA.setBackground(new java.awt.Color(0, 0, 255));
-        jl_MATERIA.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jl_MATERIA.setText("MATERIA");
-        jl_MATERIA.setBorder(null);
+        jl_MATERIA.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jl_MATERIA.setForeground(new java.awt.Color(0, 0, 225));
+        jl_MATERIA.setText("-Materia-");
         jl_MATERIA.setMaximumSize(new java.awt.Dimension(60, 60));
         jl_MATERIA.setMinimumSize(new java.awt.Dimension(60, 60));
         jl_MATERIA.setPreferredSize(new java.awt.Dimension(66, 16));
@@ -89,20 +90,6 @@ public class VistaMateria extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jb_borrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jb_limpiar)
-                                .addGap(33, 33, 33)
-                                .addComponent(jb_actualizar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(jl_MATERIA, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27)
-                        .addComponent(jb_guardar)
-                        .addGap(106, 106, 106))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jl_ID)
                         .addGap(69, 69, 69)
@@ -114,7 +101,21 @@ public class VistaMateria extends javax.swing.JInternalFrame {
                         .addComponent(jtf_materia, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83))))
+                        .addGap(83, 83, 83))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jl_MATERIA, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jb_borrar)
+                                .addGap(6, 6, Short.MAX_VALUE)
+                                .addComponent(jb_limpiar)
+                                .addGap(33, 33, 33)
+                                .addComponent(jb_actualizar)))
+                        .addGap(27, 27, 27)
+                        .addComponent(jb_guardar)
+                        .addGap(106, 106, 106))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +128,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
                     .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jl_NOMBRE)
                             .addComponent(jtf_materia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -148,9 +149,12 @@ public class VistaMateria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_buscarActionPerformed
-        int id = Integer.parseInt(jtf_id.getText());
-        Materia mate = new Materia();
-        mate = materiaData.buscarMateria(id);
+        int id = 0;
+        try {
+            id = Integer.parseInt(jtf_id.getText());
+        } catch (NumberFormatException numberFormatException) {
+        }
+        Materia mate = materiaData.buscarMateria(id);
 
         if (mate != null) {
             jtf_id.setText(mate.getIdMateria() + "");
@@ -160,10 +164,18 @@ public class VistaMateria extends javax.swing.JInternalFrame {
     }
         
     private void jb_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_borrarActionPerformed
-        int id = Integer.parseInt(jtf_id.getText());
-        Materia mate = null;
-        mate = materiaData.buscarMateria(id);
-        materiaData.eliminarMateria(mate);
+        if(JOptionPane.showConfirmDialog(null, "ESTA SEGURO QUE DESEA ELIMINAR LA MATERIA?") == 0){
+            int id = 0;
+            try {
+                id = Integer.parseInt(jtf_id.getText());
+            } catch (NumberFormatException numberFormatException) {
+            }
+            Materia mate = null;
+            mate = materiaData.buscarMateria(id);
+            materiaData.eliminarMateria(mate);
+            jtf_materia.setText("");
+            jtf_id.setText("");
+        }
 
     }//GEN-LAST:event_jb_borrarActionPerformed
 
@@ -175,32 +187,39 @@ public class VistaMateria extends javax.swing.JInternalFrame {
 
     private void jb_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_guardarActionPerformed
         String nombreMate = jtf_materia.getText();
-        Materia mate = new Materia(-1, nombreMate);
+        if(!nombreMate.equals("")){
+        Materia mate = new Materia(nombreMate);
         materiaData.guardarMateria(mate);
         jtf_id.setText(mate.getIdMateria()+"");
+        }else{
+            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NOMBRE PARA LA MATERIA");
+        }
 
     }//GEN-LAST:event_jb_guardarActionPerformed
 
     private void jb_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_actualizarActionPerformed
-        if (jtf_id.getText() != null){
+        if (!jtf_id.getText().equals("")){
             int id = Integer.parseInt(jtf_id.getText());
             String nombre = jtf_materia.getText();
             Materia mate = new Materia(id, nombre);
             materiaData.actualizarMateria(mate);
-
+        }else{
+            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN ID PARA ACTUALIZAR");
+        }
+        {     
     }//GEN-LAST:event_jb_actualizarActionPerformed
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jb_actualizar;
-    private javax.swing.JButton jb_borrar;
-    private javax.swing.JButton jb_buscar;
-    private javax.swing.JButton jb_guardar;
-    private javax.swing.JButton jb_limpiar;
-    private javax.swing.JLabel jl_ID;
-    private javax.swing.JLabel jl_MATERIA;
-    private javax.swing.JLabel jl_NOMBRE;
-    private javax.swing.JTextField jtf_id;
-    private javax.swing.JTextField jtf_materia;
+    public javax.swing.JButton jb_actualizar;
+    public javax.swing.JButton jb_borrar;
+    public javax.swing.JButton jb_buscar;
+    public javax.swing.JButton jb_guardar;
+    public javax.swing.JButton jb_limpiar;
+    public javax.swing.JLabel jl_ID;
+    public javax.swing.JLabel jl_MATERIA;
+    public javax.swing.JLabel jl_NOMBRE;
+    public javax.swing.JTextField jtf_id;
+    public javax.swing.JTextField jtf_materia;
     // End of variables declaration//GEN-END:variables
 }

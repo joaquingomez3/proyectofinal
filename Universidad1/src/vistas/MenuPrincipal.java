@@ -5,6 +5,8 @@
  */
 package vistas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gomez
@@ -149,11 +151,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jm_internoListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_internoListarActionPerformed
-        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarMaterias vLMaterias = new VistaListarMaterias();
+        vLMaterias.setVisible(true);
+        escritorio.add(vLMaterias);
+        escritorio.moveToFront(vLMaterias);
     }//GEN-LAST:event_jm_internoListarActionPerformed
 
     private void jm_internoMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_internoMateriasActionPerformed
-        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaMateria vMateria = new VistaMateria();
+        vMateria.setVisible(true);
+        escritorio.add(vMateria);
+        escritorio.moveToFront(vMateria);
     }//GEN-LAST:event_jm_internoMateriasActionPerformed
 
     private void jmi_internoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_internoActionPerformed
@@ -193,7 +205,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jm_ListarAlumnosActionPerformed
 
     private void jm_internoSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_internoSalirActionPerformed
-        System.exit(0);
+        if(JOptionPane.showConfirmDialog(null, "ESTA SEGURO QUE DESEA SALIR DEL PROGRAMA?") == 0)
+                System.exit(0);
     }//GEN-LAST:event_jm_internoSalirActionPerformed
 
     /**

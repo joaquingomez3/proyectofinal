@@ -37,7 +37,7 @@ public class AlumnoData {
 
             if (rs.next()) {
                 alumno.setIdAlumno(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "El alumno ha sido cargado");
+                JOptionPane.showMessageDialog(null, "EL ALUMNO HA SIDO CARGADO");
             } else {
                 JOptionPane.showMessageDialog(null, "No puedo obtener id");
             }
@@ -59,7 +59,11 @@ public class AlumnoData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getIdAlumno());
 
-            ps.executeUpdate();
+            if (ps.executeUpdate() != 0) {
+                JOptionPane.showMessageDialog(null, "SE ELIMINÓ AL ALUMNO");
+            } else {
+                JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR ALUMNO");
+            }
 
             ps.close();
         } catch (SQLException e) {
@@ -107,7 +111,7 @@ public class AlumnoData {
 
             ResultSet rs = ps.executeQuery();
 
-            JOptionPane.showMessageDialog(null, "ALUMNOS ENCONTRADOS:");
+            JOptionPane.showMessageDialog(null, "ALUMNOS ENCONTRADOS");
             while (rs.next()) {
                 alumno = new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
